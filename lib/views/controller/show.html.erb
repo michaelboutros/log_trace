@@ -1,0 +1,42 @@
+<table>
+	<tr>
+		<th width="35%">Date and Time of Last Hit</th>
+		<th width="20%">Total Hits in Visit</th>
+		<th width="10%">Visit Duration</th>
+		<th width="10%"></th>
+	</tr>
+</table>
+
+<% @blocks.each_with_index do |visit, group| -%>
+<table>
+	<tbody id="visit_<%= group %>">
+		<tr>
+			<td width="45%"><%= show_time_span(visit.first[:datetime])%></td>
+			<td width="18%"><%= visit.length %></td>
+			<td width="10%"><%= show_difference_in_time(visit.first[:datetime], visit.last[:datetime]) %></td>
+			<td width="10%"><%= content_tag(:span, more_link(group)) %></td>
+		</tr>
+	</tbody>
+	<tbody id="hits_<%= group %>" style="display:none;">
+		<tr>
+			<td width="15%" style="font-weight: bold;">Controller</td>
+			<td width="15%" style="font-weight: bold;">Action</td>
+			<td width="15%" style="font-weight: bold;">Method</td>
+			<td width="26%" style="font-weight: bold;">Date and Time</td>
+			<td width="10%" style="font_weight: bold;"><%= content_tag(:span, less_link(group)) %></td>
+		</tr>
+		
+	<% visit.each_with_index do |hit, id| -%>
+		<tr>
+			<td><%= hit[:controller] %></td>
+			<td><%= hit[:action] %></td>
+			<td><%= hit[:method] %></td>
+			<td><%= pretty_date(hit[:datetime]) %></td>
+			<td></td>
+		</tr>
+	<% end -%>
+	</tbody>
+</table>
+<% end -%>
+			
+<% title('View  - ' + @ip, @ip) %>

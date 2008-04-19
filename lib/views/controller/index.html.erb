@@ -1,0 +1,19 @@
+<% title('Home') %>
+
+<%= show_flash(:error_message, '<p>|||</p>') %>
+
+<table>
+	<tr>
+		<th>IP Address</th>
+		<th>Last Visit</th>
+		<th>Actions During Visit</th>
+	</tr>
+<% @results.each do |ip, user| %>
+	<tr>
+		<td><%= ip_link(ip) %></td>
+		<td><%= last_visit_indicator(user[:last_visit][:datetime]) %></td>
+		<td><%= user[:last_visit_actions] %></td>
+	</tr>
+<% end %>
+</table>
+
