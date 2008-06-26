@@ -82,31 +82,5 @@ module LogTrace
         return result.join
       end
     end
-  
-    # Work in progress.
-=begin
-    def make_image_tag_link_for_controller_chart(controllers)
-      link = "http://chart.apis.google.com/chart?"
-      
-      characters = ('A'..'Z').to_a + ('a'..'z').to_a
-      # data = controllers.values.collect {|v| characters.at(v)}.join
-      
-      puts controllers.values
-      
-      options = {
-        :chs => '400x200',
-        #:chd => 's:' + data,
-        :chl => controllers.keys.collect {|c| c.to_s.capitalize}.join('|'),
-        :cht => 'p3',
-        :chtt => 'Controller+Breakdown'
-      }
-      
-      options.each do |key, value| 
-        link << "#{key}=#{value}&"
-      end
-      
-      link
-    end
-=end
   end
 end

@@ -3,6 +3,10 @@ module LogTrace
     def authenticate
       true
     end
+    
+    def include_this_controller
+      false
+    end
      
     def index
       authenticate
@@ -51,6 +55,13 @@ module LogTrace
         end
         
         previous = current
+      end
+      
+      unless include_this_controller
+        @blocks.each_with_index do |block, index|
+          block.reject! {|visit| visit[:controller] == self.class.to_s.gsub(/Controller$/, '')}
+          @blocks.delete_at(index) if block.empty?
+        end
       end
     end
     
